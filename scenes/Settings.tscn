@@ -136,30 +136,54 @@ autowrap = true
 [node name="MainContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 269.0
 margin_right = 1248.0
-margin_bottom = 296.0
+margin_bottom = 327.0
 size_flags_horizontal = 3
 
 [node name="Settings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer"]
-margin_left = 522.0
-margin_right = 726.0
-margin_bottom = 27.0
+margin_left = 477.0
+margin_right = 770.0
+margin_bottom = 58.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Fling" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings"]
-margin_right = 204.0
+margin_right = 293.0
 margin_bottom = 27.0
+alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/Fling"]
+margin_left = 44.0
 margin_top = 2.0
-margin_right = 124.0
+margin_right = 168.0
 margin_bottom = 25.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Enable Fling? "
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/Fling"]
-margin_left = 128.0
-margin_right = 204.0
+margin_left = 172.0
+margin_right = 248.0
+margin_bottom = 27.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 3 )
+text = "Enabled"
+
+[node name="CSec" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings"]
+margin_top = 31.0
+margin_right = 293.0
+margin_bottom = 58.0
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/CSec"]
+margin_top = 2.0
+margin_right = 213.0
+margin_bottom = 25.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Enable Clock Seconds? "
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/CSec"]
+margin_left = 217.0
+margin_right = 293.0
 margin_bottom = 27.0
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 4 )
@@ -173,9 +197,10 @@ margin_bottom = 696.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "BlockyOS Version 1.1.0 | Blockyheadman
+text = "BlockyOS Beta Version 1.1.0 | Blockyheadman
 Powered Pridefully by Godot Game Engine"
 align = 1
 autowrap = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/Fling/Button" to="." method="_on_FlingButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/CSec/Button" to="." method="_on_CSecButton_pressed"]

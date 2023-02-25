@@ -1,6 +1,7 @@
 extends Control
 
 onready var fling_button = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/Fling/Button
+onready var csec_button = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/CSec/Button
 
 func _ready():
 	#$MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer.queue_free()
@@ -9,16 +10,20 @@ func _ready():
 Thanks for installing! :)
 -- Blockyheadman"""
 	$MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/InfoLabel.queue_free()
-	
+
+func _process(delta):
 	if Global.fling_enabled:
 		fling_button.text = "Enabled"
 	else:
 		fling_button.text = "Disabled"
+	
+	if Global.csec_enabled:
+		csec_button.text = "Enabled"
+	else:
+		csec_button.text = "Disabled"
 
 func _on_FlingButton_pressed():
 	Global.fling_enabled = !Global.fling_enabled
-	
-	if Global.fling_enabled:
-		fling_button.text = "Enabled"
-	else:
-		fling_button.text = "Disabled"
+
+func _on_CSecButton_pressed():
+	Global.csec_enabled = !Global.csec_enabled

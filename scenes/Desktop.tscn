@@ -42,12 +42,13 @@ columns = 18
 [node name="StartMenu" type="PanelContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -272.0
+margin_top = -280.0
 margin_right = 224.0
-margin_bottom = -52.0
+margin_bottom = -60.0
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StartMenu"]
@@ -81,19 +82,19 @@ expand_icon = true
 
 [node name="StartButton" type="PanelContainer" parent="."]
 anchor_top = 1.0
-anchor_right = 0.041
 anchor_bottom = 1.0
-margin_top = -52.0
-margin_right = -0.480003
+margin_top = -60.0
+margin_right = 60.0
 rect_min_size = Vector2( 52, 52 )
 custom_styles/panel = ExtResource( 5 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="Button" type="Button" parent="StartButton"]
-margin_right = 52.0
-margin_bottom = 52.0
+margin_right = 60.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 52, 52 )
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -106,30 +107,48 @@ __meta__ = {
 }
 
 [node name="OpenWindowsBar" type="PanelContainer" parent="."]
-anchor_left = 0.041
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.937
 anchor_bottom = 1.0
-margin_left = -0.480003
-margin_top = -52.0
+margin_left = 60.0
+margin_top = -60.0
+margin_right = 0.639648
 custom_styles/panel = ExtResource( 5 )
 __meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
+"_edit_group_": true
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="OpenWindowsBar"]
-margin_right = 1228.0
-margin_bottom = 52.0
+margin_right = 1140.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_vertical_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OpenWindowsBar/ScrollContainer"]
-margin_right = 1228.0
-margin_bottom = 52.0
+margin_right = 1140.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Clock" type="PanelContainer" parent="."]
+anchor_left = 0.937
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.639893
+margin_top = -60.0
+custom_styles/panel = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Clock"]
+margin_top = 18.0
+margin_right = 80.0
+margin_bottom = 41.0
+text = "23:59:59"
+align = 1
 
 [node name="Windows" type="Control" parent="."]
 margin_right = 40.0

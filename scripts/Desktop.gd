@@ -6,6 +6,8 @@ var window_anim_playable = true
 var user_path = OS.get_user_data_dir()
 var apps : Array
 
+var time = Time.get_time_string_from_system()
+
 func _ready():
 	$StartMenu/VBoxContainer/DownloadApps.queue_free()
 	$StartMenu/VBoxContainer/UpdateApps.set_v_size_flags(0)
@@ -18,7 +20,7 @@ func _ready():
 	elif OS.has_feature("release"):
 		$DebugTools.queue_free()
 	
-	$DebugTools.queue_free()
+	#$DebugTools.queue_free()
 	
 	#$DebugTools.visible = false # override for editor purposes
 	$StartMenu.visible = false
@@ -38,6 +40,18 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("ui_select"):
 		OS.window_fullscreen = !OS.window_fullscreen
+
+func _process(delta):
+	time = Time.get_time_string_from_system()
+	
+	if !Global.csec_enabled:
+		time.erase(time.length()-3, 3)
+		
+		if Time.get_time_dict_from_system()["second"] % 2 != 0:
+			time.erase(time.length()-3, 1)
+			time = time.insert(time.length()-2, " ")
+	
+	$Clock/Label.text = time
 
 # removes all nodes from the AppsGridContainer
 func clear_app_buttons():
@@ -393,7 +407,7 @@ func _on_StartButton_mouse_entered():
 	var tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property($StartButton/Button, "rect_size", Vector2(56,56), 0.4)
+	tween.tween_property($StartButton/Button, "rect_size", Vector2(64,64), 0.4)
 	tween.parallel().tween_property($StartButton/Button, "rect_position", Vector2(-2,-2), 0.4)
 
 func _on_StartButton_mouse_exited():
@@ -401,7 +415,7 @@ func _on_StartButton_mouse_exited():
 	var tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property($StartButton/Button, "rect_size", Vector2(52,52), 0.4)
+	tween.tween_property($StartButton/Button, "rect_size", Vector2(60,60), 0.4)
 	tween.parallel().tween_property($StartButton/Button, "rect_position", Vector2(0,0), 0.4)
 
 func _on_StartButton_toggled(button_pressed):
@@ -412,7 +426,7 @@ func _on_StartButton_toggled(button_pressed):
 		$StartMenu.grab_focus()
 		$StartMenu.visible = true
 		tween.tween_property($StartMenu, "rect_size", Vector2(224,220), 1)
-		tween.parallel().tween_property($StartMenu, "rect_position", Vector2(0,get_viewport_rect().size.y-272), 1)
+		tween.parallel().tween_property($StartMenu, "rect_position", Vector2(0,get_viewport_rect().size.y-280), 1)
 		tween.parallel().tween_property($StartMenu, "modulate", Color(1,1,1,1), 1)
 	else:
 		$StartMenu.focus_mode = Control.FOCUS_NONE

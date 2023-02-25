@@ -29,6 +29,9 @@ func _ready():
 	tween.tween_property(self, "rect_position", Vector2(self.rect_position.x-152, self.rect_position.y-158), 0.75)
 	tween.parallel().tween_property(self, "rect_size", Vector2(544, 320), 0.75)
 	tween.parallel().tween_property(self, "modulate", Color(1,1,1,1), 0.5)
+	
+	if !OS.has_feature("debug"):
+		$DebugLabel.queue_free()
 
 func _process(_delta):
 	if Global.fling_enabled == true:
@@ -39,15 +42,17 @@ func _process(_delta):
 		else:
 			window_resizing = false
 		fling_speed = Vector2(round(self.rect_position.x - prev_pos.x), round(self.rect_position.y - prev_pos.y))
-		if window_resizing:
-			$DebugLabel.text = "Resizing Window"
-			pass
-		else:
-			$DebugLabel.text = "Fling: " + str(fling_speed)
-			#fling_speed = Vector2(round(self.rect_position.x - prev_pos.x), round(self.rect_position.y - prev_pos.y))
+		if OS.has_feature("debug"):
+			if window_resizing:
+				$DebugLabel.text = "Resizing Window"
+				pass
+			else:
+				$DebugLabel.text = "Fling: " + str(fling_speed)
+				#fling_speed = Vector2(round(self.rect_position.x - prev_pos.x), round(self.rect_position.y - prev_pos.y))
 	else:
-		if $DebugLabel.visible == true:
-			$DebugLabel.hide()
+		if OS.has_feature("debug"):
+			if $DebugLabel.visible == true:
+				$DebugLabel.hide()
 	
 	if maximized == true && max_anim_done == true:
 		rect_position = Vector2(0,20)
