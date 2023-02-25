@@ -145,7 +145,7 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Clock"]
 margin_top = 18.0
-margin_right = 80.0
+margin_right = 80.0001
 margin_bottom = 41.0
 text = "23:59:59"
 align = 1

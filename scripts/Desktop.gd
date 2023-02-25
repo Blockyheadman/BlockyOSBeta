@@ -9,6 +9,8 @@ var apps : Array
 var time = Time.get_time_string_from_system()
 
 func _ready():
+	Global.load_settings()
+	
 	$StartMenu/VBoxContainer/DownloadApps.queue_free()
 	$StartMenu/VBoxContainer/UpdateApps.set_v_size_flags(0)
 	OS.min_window_size = Vector2(640,360)
@@ -152,6 +154,7 @@ func _on_window_button_pressed(button, is_button : bool):
 		if window_anim_playable == true:
 			if window_node.visible == false:
 				window_anim_playable = false
+				window_node.raise()
 				get_node("OpenWindowsBar/ScrollContainer/HBoxContainer").get_node(str(button)).get_child(1).add_stylebox_override("panel", panel_selected)
 				window_node.rect_size = Vector2(240,0)
 				window_node.rect_position = Vector2(get_viewport_rect().size.x/2.48, get_viewport_rect().size.y/2)

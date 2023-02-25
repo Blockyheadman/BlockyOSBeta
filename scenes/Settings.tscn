@@ -65,7 +65,7 @@ expand_margin_bottom = 2.0
 size = 8
 font_data = ExtResource( 1 )
 
-[node name="Settings" type="Control"]
+[node name="Settings" type="Control" groups=["Persist"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
@@ -136,59 +136,82 @@ autowrap = true
 [node name="MainContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 269.0
 margin_right = 1248.0
-margin_bottom = 327.0
+margin_bottom = 358.0
 size_flags_horizontal = 3
 
 [node name="Settings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer"]
-margin_left = 477.0
-margin_right = 770.0
-margin_bottom = 58.0
+margin_left = 422.0
+margin_right = 826.0
+margin_bottom = 89.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Fling" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings"]
-margin_right = 293.0
+margin_right = 404.0
 margin_bottom = 27.0
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/Fling"]
-margin_left = 44.0
+margin_left = 100.0
 margin_top = 2.0
-margin_right = 168.0
+margin_right = 224.0
 margin_bottom = 25.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Enable Fling? "
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/Fling"]
-margin_left = 172.0
-margin_right = 248.0
+margin_left = 228.0
+margin_right = 304.0
 margin_bottom = 27.0
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/normal = SubResource( 3 )
 text = "Enabled"
 
-[node name="CSec" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings"]
+[node name="BGWindowEffect" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings"]
 margin_top = 31.0
-margin_right = 293.0
+margin_right = 404.0
 margin_bottom = 58.0
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/CSec"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/BGWindowEffect"]
 margin_top = 2.0
-margin_right = 213.0
+margin_right = 320.0
+margin_bottom = 25.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Enable Background Window Effect? "
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/BGWindowEffect"]
+margin_left = 324.0
+margin_right = 404.0
+margin_bottom = 27.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 3 )
+text = "Disabled"
+
+[node name="CSec" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings"]
+margin_top = 62.0
+margin_right = 404.0
+margin_bottom = 89.0
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/CSec"]
+margin_left = 53.0
+margin_top = 2.0
+margin_right = 266.0
 margin_bottom = 25.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Enable Clock Seconds? "
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/CSec"]
-margin_left = 217.0
-margin_right = 293.0
+margin_left = 270.0
+margin_right = 350.0
 margin_bottom = 27.0
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/normal = SubResource( 3 )
-text = "Enabled"
+text = "Disabled"
 
 [node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 margin_top = 669.0
@@ -203,4 +226,5 @@ align = 1
 autowrap = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/Fling/Button" to="." method="_on_FlingButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/BGWindowEffect/Button" to="." method="_on_WindowBGButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/CSec/Button" to="." method="_on_CSecButton_pressed"]

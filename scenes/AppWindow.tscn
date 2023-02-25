@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/AppWindow.gd" type="Script" id=1]
 [ext_resource path="res://resources/textures/Close_Normal.png" type="Texture" id=2]
@@ -45,7 +45,11 @@ size = 12
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 11 )
 
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0, 0, 0.333333 )
+
 [node name="AppWindow" type="WindowDialog"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -106,6 +110,12 @@ margin_bottom = -3.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 5 )
 text = "(0, 0)"
+
+[node name="WindowRaiser" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_styles/panel = SubResource( 6 )
 
 [connection signal="pressed" from="MinimizeButton" to="." method="_on_MinimizeButton_pressed"]
 [connection signal="pressed" from="MaximizeButton" to="." method="_on_MaximizeButton_pressed"]

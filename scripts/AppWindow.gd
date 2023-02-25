@@ -60,8 +60,34 @@ func _process(_delta):
 	elif maximized == false:
 		self.prev_size = rect_size
 		self.prev_pos = rect_position
+	
+	if get_index() < get_parent().get_child_count()-1:
+		$WindowRaiser.raise()
+	elif get_index() == get_parent().get_child_count()-1:
+		move_child(get_node("WindowRaiser"), 0)
+	else:
+		move_child(get_node("WindowRaiser"), 0)
+	
+	if Global.bg_window_effect:
+		var tween = get_tree().create_tween()
+		tween.set_ease(Tween.EASE_OUT)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property($WindowRaiser, "modulate", Color8(255,255,255,255), 0.75)
+	else:
+		var tween = get_tree().create_tween()
+		tween.set_ease(Tween.EASE_OUT)
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property($WindowRaiser, "modulate", Color8(255,255,255,0), 0.75)
+	
+	#print(self.name + " is at position " + str(self.get_index()))
+	#print("there are a total of " + str(get_parent().get_child_count()) + " children.")
 
 func _gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == 1:
+			if event.pressed:
+				raise()
+			
 	if Global.fling_enabled == true:
 		if !maximized:
 			if event is InputEventMouseButton:
@@ -151,6 +177,8 @@ func close_window_right():
 func _on_MaximizeButton_pressed():
 	if max_anim_done == true:
 		if maximized == false:
+			raise()
+			
 			max_anim_done = false
 			maximized = true
 			
@@ -165,7 +193,7 @@ func _on_MaximizeButton_pressed():
 			tween.set_trans(Tween.TRANS_CUBIC)
 			tween.connect("finished", self, "maximize_anim_done")
 			tween.tween_property(self, "rect_position", Vector2(0, 20), 0.5)
-			tween.parallel().tween_property(self, "rect_size", Vector2(get_viewport_rect().size.x, get_viewport_rect().size.y-72), 0.5)
+			tween.parallel().tween_property(self, "rect_size", Vector2(get_viewport_rect().size.x, get_viewport_rect().size.y-80), 0.5)
 		
 		elif maximized == true:
 			maximized = false
