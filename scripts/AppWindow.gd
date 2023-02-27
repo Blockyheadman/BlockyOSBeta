@@ -5,6 +5,8 @@ signal window_hidden
 
 var window_anim_playable = true
 var maximized = false
+var snapped_left = false
+var snapped_right = false
 var prev_size = Vector2()
 var prev_pos = Vector2()
 
@@ -57,9 +59,38 @@ func _process(_delta):
 	if maximized == true && max_anim_done == true:
 		rect_position = Vector2(0,20)
 	
-	elif maximized == false:
+	elif snapped_left == true && max_anim_done == true:
+		$WindowRaiser.visible = false
+		#rect_position = Vector2(0,20)
+		if rect_position.x != 0:
+			print("unsnapping left.")
+			var tween = get_tree().create_tween()
+			tween.set_ease(Tween.EASE_OUT)
+			tween.set_trans(Tween.TRANS_CUBIC)
+			tween.tween_property(self, "rect_size", prev_size, 0.5)
+			self.resizable = true
+			yield(get_tree().create_timer(0.5), "timeout")
+			snapped_left = false
+	
+	elif snapped_right == true && max_anim_done == true:
+		$WindowRaiser.visible = false
+		#rect_position = Vector2(get_viewport_rect().size.x/2,20)
+		if rect_position.x != get_viewport_rect().size.x/2:
+			print("unsnapping left.")
+			var tween = get_tree().create_tween()
+			tween.set_ease(Tween.EASE_OUT)
+			tween.set_trans(Tween.TRANS_CUBIC)
+			tween.tween_property(self, "rect_size", prev_size, 0.5)
+			self.resizable = true
+			yield(get_tree().create_timer(0.5), "timeout")
+			snapped_right = false
+	
+	if !maximized and !snapped_left and !snapped_right:
+		$WindowRaiser.visible = true
 		self.prev_size = rect_size
 		self.prev_pos = rect_position
+	
+	#print(prev_size)
 	
 	if get_index() < get_parent().get_child_count()-1:
 		$WindowRaiser.raise()
@@ -87,9 +118,20 @@ func _gui_input(event):
 		if event.button_index == 1:
 			if event.pressed:
 				raise()
-			
+				
+			elif !event.pressed:
+				if rect_position.x < 0:
+					if Global.window_snap:
+						print("snapping left")
+						snap_left()
+				
+				elif rect_position.x + rect_size.x > get_viewport_rect().size.x:
+					if Global.window_snap:
+						print("snapping left")
+						snap_right()
+	
 	if Global.fling_enabled == true:
-		if !maximized:
+		if !maximized and !snapped_left and !snapped_right:
 			if event is InputEventMouseButton:
 				if event.button_index == 1:
 					if event.pressed:
@@ -173,6 +215,40 @@ func close_window_right():
 	tween.tween_property(self, "rect_position", Vector2(get_viewport_rect().size.x+self.rect_size.x, self.rect_position.y+158), 0.75)
 	tween.parallel().tween_property(self, "rect_size", Vector2(240, 0), 0.75)
 	tween.parallel().tween_property(self, "modulate", Color8(255,255,255,0), 0.75)
+
+func snap_left():
+	if max_anim_done == true:
+		if snapped_left == false:
+			raise()
+			
+			max_anim_done = false
+			snapped_left = true
+			
+			self.resizable = false
+			
+			var tween = get_tree().create_tween()
+			tween.set_ease(Tween.EASE_OUT)
+			tween.set_trans(Tween.TRANS_CUBIC)
+			tween.connect("finished", self, "maximize_anim_done")
+			tween.tween_property(self, "rect_position", Vector2(0, 20), 0.5)
+			tween.parallel().tween_property(self, "rect_size", Vector2(get_viewport_rect().size.x/2, get_viewport_rect().size.y-80), 0.5)
+
+func snap_right():
+	if max_anim_done == true:
+		if snapped_right == false:
+			raise()
+			
+			max_anim_done = false
+			snapped_right = true
+			
+			self.resizable = false
+			
+			var tween = get_tree().create_tween()
+			tween.set_ease(Tween.EASE_OUT)
+			tween.set_trans(Tween.TRANS_CUBIC)
+			tween.connect("finished", self, "maximize_anim_done")
+			tween.tween_property(self, "rect_position", Vector2(get_viewport_rect().size.x/2, 20), 0.5)
+			tween.parallel().tween_property(self, "rect_size", Vector2(get_viewport_rect().size.x/2, get_viewport_rect().size.y-80), 0.5)
 
 func _on_MaximizeButton_pressed():
 	if max_anim_done == true:

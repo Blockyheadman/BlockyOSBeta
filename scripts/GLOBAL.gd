@@ -2,12 +2,14 @@ extends Node
 
 var fling_enabled = true
 var bg_window_effect = false
+var window_snap = true
 var csec_enabled = false
 
 func save():
 	var save_dict = {
 		"fling_enabled" : fling_enabled,
 		"bg_window_effect" : bg_window_effect,
+		"window_snap" : window_snap,
 		"clock_seconds_enabled" : csec_enabled
 	}
 	return save_dict
@@ -49,6 +51,7 @@ func load_settings():
 		print("Success! 'fling_enabled' Value exists!")
 		fling_enabled = node_data["fling_enabled"]
 		bg_window_effect = node_data["bg_window_effect"]
+		window_snap = node_data["window_snap"]
 		csec_enabled = node_data["clock_seconds_enabled"]
 
 	save.close()

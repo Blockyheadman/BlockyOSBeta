@@ -133,6 +133,16 @@ func _on_button_pressed(button):
 				open_app(app_node, pressed_button)
 			else:
 				printerr("The file, 'res://" + pressed_button + "/Main.tscn' doesn't exist skipping opening app.")
+			
+			if pck_file.file_exists("res://" + pressed_button + "/scenes/Main.tscn"):
+				app_node_scene = load("res://" + str(pressed_button) + "/scenes/Main.tscn")
+				print("\n" + str(app_node_scene))
+				app_node = app_node_scene.instance()
+				print("\n" + str(app_node))
+				open_app(app_node, pressed_button)
+			else:
+				printerr("The file, 'res://" + pressed_button + "/scenes/Main.tscn' doesn't exist skipping opening app.")
+			
 		else:
 			printerr("Failed to load pck file.")
 	else:

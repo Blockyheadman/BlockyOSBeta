@@ -2,6 +2,7 @@ extends Control
 
 onready var fling_button = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/Fling/Button
 onready var window_bg_button = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/BGWindowEffect/Button
+onready var window_snap_button = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/WindowSnap/Button
 onready var csec_button = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MainContainer/Settings/CSec/Button
 
 func _ready():
@@ -11,7 +12,6 @@ func _ready():
 Thanks for installing! :)
 -- Blockyheadman"""
 	$MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/InfoLabel.queue_free()
-
 func _process(delta):
 	if Global.fling_enabled:
 		fling_button.text = "Enabled"
@@ -22,6 +22,11 @@ func _process(delta):
 		window_bg_button.text = "Enabled"
 	else:
 		window_bg_button.text = "Disabled"
+	
+	if Global.window_snap:
+		window_snap_button.text = "Enabled"
+	else:
+		window_snap_button.text = "Disabled"
 	
 	if Global.csec_enabled:
 		csec_button.text = "Enabled"
@@ -34,6 +39,7 @@ func save():
 	var save_dict = {
 		"fling_enabled" : Global.fling_enabled,
 		"bg_window_effect" : Global.bg_window_effect,
+		"window_snap" : Global.window_snap,
 		"clock_seconds_enabled" : Global.csec_enabled
 	}
 	return save_dict
@@ -43,6 +49,9 @@ func _on_FlingButton_pressed():
 
 func _on_WindowBGButton_pressed():
 	Global.bg_window_effect = !Global.bg_window_effect
+
+func _on_WindowSnapButton_pressed():
+	Global.window_snap = !Global.window_snap
 
 func _on_CSecButton_pressed():
 	Global.csec_enabled = !Global.csec_enabled
