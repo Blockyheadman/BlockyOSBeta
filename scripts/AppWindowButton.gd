@@ -6,7 +6,7 @@ var panel_selected = load("res://resources/presets/AppButtonSelected.tres")
 var panel_unselected = load("res://resources/presets/AppButtonUnselected.tres")
 
 func _ready():
-	var desktop = get_parent().get_parent().get_parent().get_parent().get_parent()
+	var desktop = get_viewport().get_node("Desktop")
 	desktop.connect("close_app_window_button", self, "_on_window_closed")
 	print(get_parent().get_name())
 

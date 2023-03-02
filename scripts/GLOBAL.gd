@@ -1,9 +1,13 @@
 extends Node
 
+# Globals variables for system settings
 var fling_enabled = true
 var bg_window_effect = false
 var window_snap = true
 var csec_enabled = false
+
+# Global variables for system events.
+var start_menu_shown = false
 
 func save():
 	var save_dict = {

@@ -19,6 +19,7 @@ boot_splash/image="res://resources/icons/BlockyOS.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0, 0.427451, 0.27451, 1 )
 config/icon="res://resources/icons/BlockyOS.png"
+config/macos_native_icon="res://resources/icons/BlockyOS.icns"
 config/windows_native_icon="res://resources/icons/BlockyOS.ico"
 
 [autoload]
