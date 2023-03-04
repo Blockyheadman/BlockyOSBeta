@@ -12,6 +12,7 @@ var menu_button_anim_done := true
 var time = Time.get_time_string_from_system()
 
 func _ready():
+	#OS.window_size = Vector2(1792, 1008)
 	Global.load_settings()
 	
 	$MenuBar/StartMenu/VBoxContainer/DownloadApps.queue_free()
@@ -44,8 +45,9 @@ func _ready():
 	pass
 
 func _input(event):
-	if event.is_action_pressed("ui_select"):
-		OS.window_fullscreen = !OS.window_fullscreen
+	if event is InputEventKey:
+		if event.scancode == 16777254:
+			OS.window_fullscreen = !OS.window_fullscreen
 	
 	if event is InputEventMouse:
 		if event.position.x >= 0 and event.position.y >= $MenuBar/StartButton.rect_position.y:
@@ -403,7 +405,6 @@ func _on_OpenApp_pressed():
 	print("\n" + str(app_node_scene))
 	app_node = app_node_scene.instance()
 	print("\n" + str(app_node))
-	open_built_in_app(app_node, "Settings", icon)
 	open_built_in_app(app_node, "Settings", icon)
 
 # ANIMATIONS GO HERE
